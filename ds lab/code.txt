@@ -1,0 +1,48 @@
+#include <stdio.h>
+#define MAX 5
+typedef struct stk 
+{
+    int TOP;
+    int A[MAX];
+}Stack;
+
+void Create_Stack(Stack *s) 
+{
+    s->TOP=-1;
+}
+
+void PUSH(Stack *s,int value) 
+{
+    if(s->TOP == MAX-1) {
+        printf("\nStack is full.");
+    }
+    else{
+        s->TOP += 1;
+        s->A[s->TOP] = value;
+    }
+}
+
+int POP(Stack *s) {
+    int x;
+    if(s->TOP == -1) {
+        printf("\n Stack is Empty.");
+        return -1;
+    }
+    x = s->A[s->TOP];
+    s->TOP -= 1;
+    return x;
+}
+
+void main() {
+    Stack S;
+    int x;
+    Create_Stack(&S);
+    PUSH(&S,1);
+    PUSH(&S,2);
+    PUSH(&S,3);
+    PUSH(&S,4);
+    x = POP(&S);
+    printf("%d",x);
+    x = POP(&S);
+    printf("\n%d",x);
+}

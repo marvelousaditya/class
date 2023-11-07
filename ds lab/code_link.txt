@@ -1,0 +1,66 @@
+#include <stdio.h> 
+#include <stdlib.h>
+typedef struct link_list {
+	int INFO;
+	struct link_list *NEXT;
+}NODE;
+
+void insert_at_beg(NODE **head,int value) {
+	NODE *ptr;
+	ptr = malloc(sizeof(NODE));
+	ptr->INFO = value;
+	ptr->NEXT = NULL;
+	if(*head == NULL) {
+		*head = ptr;
+	}
+	else {
+		ptr->NEXT = *head;
+		*head = ptr;
+	}
+}
+void insert_at_end(NODE **head,int value) {
+	NODE *ptr1,*ptr2;
+	ptr1 = malloc(sizeof(NODE));
+	ptr2 = *head;
+	ptr1->INFO = value;
+	ptr1->NEXT = NULL;
+	if(ptr2 == NULL) {
+		*head = ptr1;
+		return;
+	}
+	while(ptr2->NEXT != NULL) {
+		ptr2 = ptr2->NEXT;
+	}
+	ptr2->NEXT = ptr1;
+}
+void display(NODE **head) {
+	NODE *ptr;
+	ptr = *head;
+	if(ptr == NULL) {
+		printf("\nLINKED LIST is empty.");
+		return;
+	}
+	printf("\nLINKED LIST is : ");
+	while(ptr != NULL) {
+		printf("%d ",ptr->INFO);
+		ptr = ptr->NEXT;
+	}
+}
+void main() {
+	NODE *head;
+	head = NULL;
+	//
+	display(&head);
+	insert_at_beg(&head,100);
+	insert_at_beg(&head,90);
+	insert_at_beg(&head,80);
+	display(&head);
+	insert_at_beg(&head,70);
+	insert_at_beg(&head,60);
+	display(&head);
+	//
+	insert_at_end(&head,110);
+	insert_at_end(&head,120);
+	insert_at_end(&head,130);
+	display(&head);
+}

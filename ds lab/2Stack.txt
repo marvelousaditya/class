@@ -1,0 +1,76 @@
+#include <stdio.h>
+#define MAX 10
+typedef struct stk 
+{
+    int START;
+    int END;
+    int A[MAX];
+}Stack;
+
+void Create_Stack(Stack *s) 
+{
+    s->START=-1;
+    s->END=MAX;
+}
+
+void PUSH(Stack *s,int value,int opt) 
+{
+    if(s->START+1 == s->END) {
+        printf("Stack is full.\n");
+    }
+    else if(opt == 1){
+        s->START += 1;
+        s->A[s->START] = value;
+    }
+    else if(opt == 2) {
+        s->END -= 1;
+        s->A[s->END] = value;
+    }
+    else{
+        printf("Invalid option\n");
+    }
+}
+
+int POP(Stack *s,int opt) {
+    int x;
+    if(opt == 1) {
+        if(s->START == -1) {
+            printf("Stack1 is Empty.\n");
+            return -1;
+        }
+        x = s->A[s->START];
+        s->START -= 1;
+        return x;
+    }
+    else if(opt == 2) {
+        if(s->END == MAX) {
+            printf("Stack2 is Empty\n");
+            return -1;
+        }
+        x = s->A[s->END];
+        s->END += 1;
+        return x;
+    }
+    else {
+        printf("Invalid option\n");
+        return -1;
+    }
+}
+
+void main() {
+    Stack S;
+    int x;
+    Create_Stack(&S);
+    //(stack,value,stack number)
+    PUSH(&S,1,1);
+    PUSH(&S,2,1);
+    PUSH(&S,10,2);
+    PUSH(&S,9,2);
+    PUSH(&S,8,3);
+    //(stack,stack number)
+    x = POP(&S,1);
+    printf("%d\n",x);
+    x = POP(&S,2);
+    printf("%d\n",x);
+    x = POP(&S,4);
+}
