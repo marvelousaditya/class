@@ -68,7 +68,6 @@ void main()
 {
     QUEUE q;
     int value, y, ch;
-    clrscr();
     Create_Queue(&q);
 
     while (1)
@@ -95,6 +94,7 @@ void main()
             display(&q);
             break;
         case 4:
+            printf("ADITYA SINGH - 2201430100016");
             exit(0);
         }
     }

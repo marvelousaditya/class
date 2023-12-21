@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 void bubble(int A[],int n) {
       int i,pass,temp;
       for(pass = 1;pass < n;pass++) {
@@ -17,13 +16,11 @@ void main() {
       printf("enter the size of array\n");
       scanf("%d",&n);
       printf("enter the elements of array\n");
-      for(i = 0;i < n;i++) {
+      for(i = 0;i < n;i++) 
             scanf("%d",&A[i]);
-      }
       bubble(A,n);
       printf("sorted array is\n");
-      for(i = 0;i < n;i++) {
+      for(i = 0;i < n;i++) 
             printf("%d ",A[i]);
-      }
 }
 

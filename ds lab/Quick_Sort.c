@@ -38,12 +38,10 @@ void main() {
     printf("enter the size of array\n");
     scanf("%d",&n);
     printf("enter the elements of array\n");
-    for(i = 0;i < n;i++) {
+    for(i = 0;i < n;i++) 
         scanf("%d",&A[i]);
-    }
     Quick_Sort(A,0,n-1);
     printf("sorted array is\n");
-    for(i = 0;i < n;i++) {
+    for(i = 0;i < n;i++) 
         printf("%d ",A[i]);
-    }
 }

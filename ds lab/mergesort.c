@@ -16,21 +16,18 @@ void Merge(int A[],int l,int m,int n) {
             }
             k++;
       }
-      while (i <= m && j > n)
-      {
+      while (i <= m && j > n) {
             R[k] = A[i];
             i++;
             k++;
       }
-      while((j <= n && i > m))
-      {
+      while((j <= n && i > m)) {
             R[k] = A[j];
             j++;
             k++;
       }
-      for (i = l;i <= n;i++) {
+      for (i = l;i <= n;i++) 
             A[i] = R[i];
-      }
 }
 void MergeSort(int A[],int left,int right) {
       int mid;
@@ -43,15 +40,13 @@ void MergeSort(int A[],int left,int right) {
 }
 void main() {
       int A[20],n,i;
-      printf("enter the size of array\n");
+      printf("enter the size of array : ");
       scanf("%d",&n);
       printf("enter the elements of array\n");
-      for(i = 0;i < n;i++) {
+      for(i = 0;i < n;i++) 
             scanf("%d",&A[i]);
-      }
       MergeSort(A,0,n-1);
-      printf("sorted array is\n");
-      for(i = 0;i < n;i++) {
+      printf("sorted array is : ");
+      for(i = 0;i < n;i++) 
             printf("%d ",A[i]);
-      }
 }
