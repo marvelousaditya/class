@@ -10,7 +10,7 @@ typedef struct bst
 void insert(NODE **root, int value)
 {
       NODE *ptr, *loc1, *loc2;
-      ptr = malloc(sizeof(NODE));
+      ptr = (NODE *)malloc(sizeof(NODE));
       ptr->INFO = value;
       ptr->RIGHT = NULL;
       ptr->LEFT = NULL;
@@ -42,11 +42,11 @@ void insert(NODE **root, int value)
                         }
                   }
             }
+            if (value > loc1->INFO)
+                  loc1->RIGHT = ptr;
+            else
+                  loc1->LEFT = ptr;
       }
-      if (value > loc1->INFO)
-            loc1->RIGHT = ptr;
-      else
-            loc1->LEFT = ptr;
 }
 
 void inorder(NODE *root)
@@ -77,14 +77,14 @@ void postorder(NODE *root)
             printf("%d ", root->INFO);
       }
 }
-void main()
+int main()
 {
       NODE *root;
       int ch, value;
       root = NULL;
       while (1)
       {
-            printf("\n1.Insert NODE in BST");
+            printf("\n\n1.Insert NODE in BST");
             printf("\n2.Inorder");
             printf("\n3.Preorder");
             printf("\n4.Postorder");

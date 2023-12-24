@@ -1,47 +1,117 @@
-//
-// Created by aditya on 07-12-2023.
-//
 #include <stdio.h>
-int partition(int a[],int lb,int ub) {
-    int pivot,up,down,temp;
-    down = lb;
-    up = ub+1;
-    pivot = a[lb];
-    while(down <= up) {
-        do {
-            down++;
-        }while (a[down] < pivot);
-        do {
-            up--;
-        } while( a[up] > pivot);
-        if (down < up) {
-            temp = a[down];
-            a[down] = a[up];
-            a[up] = temp;
-        }
-    }
-    temp = a[lb];
-    a[lb] = a[up];
-    a[up] = temp;
-    return up;
+#include <stdlib.h>
+typedef struct bst
+{
+      struct bst *LEFT;
+      struct bst *RIGHT;
+      int INFO;
+} NODE;
+
+void insert(NODE **root, int value)
+{
+      NODE *ptr, *loc1, *loc2;
+      ptr = (NODE *)malloc(sizeof(NODE));
+      ptr->INFO = value;
+      ptr->RIGHT = NULL;
+      ptr->LEFT = NULL;
+      if (*root == NULL)
+      {
+            *root = ptr;
+      }
+      else
+      {
+            loc1 = NULL;
+            loc2 = *root;
+            while (loc2 != NULL)
+            {
+                  loc1 = loc2;
+                  if (value > loc2->INFO)
+                  {
+                        loc2 = loc2->RIGHT;
+                  }
+                  else
+                  {
+                        if (value < loc2->INFO)
+                        {
+                              loc2 = loc2->LEFT;
+                        }
+                        else
+                        {
+                              printf("\nDuplicate Entry");
+                              return;
+                        }
+                  }
+            }
+            if (value > loc1->INFO)
+                  loc1->RIGHT = ptr;
+            else
+                  loc1->LEFT = ptr;
+      }
 }
-void Quick_Sort(int a[],int lb,int ub) {
-    int u;
-    if(lb < ub) {
-        u = partition(a,lb,ub);
-        Quick_Sort(a,lb,u-1);
-        Quick_Sort(a,u+1,ub);
-    }
+
+void inorder(NODE *root)
+{
+      if (root != NULL)
+      {
+            inorder(root->LEFT);
+            printf("%d ", root->INFO);
+            inorder(root->RIGHT);
+      }
 }
-void main() {
-    int A[20],n,i;
-    printf("enter the size of array\n");
-    scanf("%d",&n);
-    printf("enter the elements of array\n");
-    for(i = 0;i < n;i++) 
-        scanf("%d",&A[i]);
-    Quick_Sort(A,0,n-1);
-    printf("sorted array is\n");
-    for(i = 0;i < n;i++) 
-        printf("%d ",A[i]);
+
+void preorder(NODE *root)
+{
+      if (root != NULL)
+      {
+            printf("%d ", root->INFO);
+            preorder(root->LEFT);
+            preorder(root->RIGHT);
+      }
+}
+void postorder(NODE *root)
+{
+      if (root != NULL)
+      {
+            postorder(root->RIGHT);
+            postorder(root->LEFT);
+            printf("%d ", root->INFO);
+      }
+}
+void main()
+{
+      NODE *root;
+      int ch, value;
+      root = NULL;
+      while (1)
+      {
+            printf("\n\n1.Insert NODE in BST");
+            printf("\n2.Inorder");
+            printf("\n3.Preorder");
+            printf("\n4.Postorder");
+            printf("\n5.Exit");
+            printf("\nEnter your choice : ");
+            scanf("%d", &ch);
+            switch (ch)
+            {
+            case 1:
+                  printf("enter value : ");
+                  scanf("%d", &value);
+                  insert(&root, value);
+                  break;
+            case 2:
+                  printf("\ninorder traversal of BST : ");
+                  inorder(root);
+                  break;
+            case 3:
+                  printf("\npreorder traversal of BST : ");
+                  preorder(root);
+                  break;
+            case 4:
+                  printf("\npostorder traversal of BST : ");
+                  postorder(root);
+                  break;
+            case 5:
+                  exit(0);
+            }
+      }
 }
