@@ -135,7 +135,7 @@ void postorder(NODE *root)
 int height(NODE *root)
 {
       if (root == NULL)
-            return -1; // height of empty tree is -1
+            return -1;
       else
       {
             int leftHeight = height(root->LEFT);
