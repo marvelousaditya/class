@@ -48,6 +48,61 @@ void insert(NODE **root, int value)
                   loc1->LEFT = ptr;
       }
 }
+void delete(NODE **root, int value)
+{
+      NODE *p, *q, *rp, *f, *s;
+      p = *root;
+      q = NULL;
+      while (p != NULL && p->INFO != value)
+      {
+            q = p;
+            if (value < p->INFO)
+                  p = p->LEFT;
+            else
+                  p = p->RIGHT;
+      }
+      if (p == NULL)
+            return;
+      if (p->LEFT == NULL)
+            rp = p->RIGHT;
+      else if (p->RIGHT == NULL)
+            rp = p->LEFT;
+      else
+      {
+            f = p;
+            rp = p->RIGHT;
+            s = rp->LEFT;
+            while (s != NULL)
+            {
+                  f = rp;
+                  rp = s;
+                  s = s->LEFT;
+            }
+            if (f != p)
+            {
+                  f->LEFT = rp->RIGHT;
+                  rp->RIGHT = p->RIGHT;
+            }
+            rp->LEFT = p->LEFT;
+      }
+      if (q == NULL)
+            *root = rp;
+      else
+      {
+            if (p == q->RIGHT)
+                  q->RIGHT = rp;
+            else
+                  q->LEFT = rp;
+      }
+      free(p);
+}
+int count(NODE *root)
+{
+      if (root == NULL)
+            return 0;
+      else
+            return (count(root->LEFT) + count(root->RIGHT) + 1);
+}
 
 void inorder(NODE *root)
 {
@@ -77,6 +132,17 @@ void postorder(NODE *root)
             printf("%d ", root->INFO);
       }
 }
+int height(NODE *root)
+{
+      if (root == NULL)
+            return -1; // height of empty tree is -1
+      else
+      {
+            int leftHeight = height(root->LEFT);
+            int rightHeight = height(root->RIGHT);
+            return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
+      }
+}
 int main()
 {
       NODE *root;
@@ -88,7 +154,10 @@ int main()
             printf("\n2.Inorder");
             printf("\n3.Preorder");
             printf("\n4.Postorder");
-            printf("\n5.Exit");
+            printf("\n5.Delete a node");
+            printf("\n6.Count number of nodes");
+            printf("\n7.Height of tree");
+            printf("\n8.Exit");
             printf("\nEnter your choice : ");
             scanf("%d", &ch);
             switch (ch)
@@ -111,6 +180,17 @@ int main()
                   postorder(root);
                   break;
             case 5:
+                  printf("\nEnter tree value to delete : ");
+                  scanf("%d", &value);
+                  delete (&root, value);
+                  break;
+            case 6:
+                  printf("\nNumber of nodes in BST : %d", count(root));
+                  break;
+            case 7:
+                  printf("\nHeight of tree : %d", height(root));
+                  break;
+            case 8:
                   exit(0);
             }
       }
